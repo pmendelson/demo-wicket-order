@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+
+<project name="example" default="main" basedir=".">
+
+  <property file="build.properties" />
+  
+  <property name="name" value="example"/>
+ 
+  <property name="src.dir" value="src"/>
+  <property name="doc.dir" value="doc"/>
+  <property name="bin.dir" value="bin"/>
+  <property name="build.dir" value="build"/>
+  <property name="lib.dir" value="lib"/>
+
+  <property name="dist.dir" value="dist"/>
+  
+
+	<taskdef name="ebeanEnhance" classname="com.avaje.ebean.enhance.ant.AntEnhanceTask">
+		<classpath>
+			<fileset dir="${lib.dir}" includes="ebean-2.*.jar" />
+		</classpath>
+	</taskdef>
+
+	<!-- on the bin for running in the IDE. Using Eclipse IDE Enhancement another option -->
+	<target name="bin-ormTransactionalEnhance">
+
+		<ebeanEnhance classSource="bin" packages="app/data/query/**,setup/**" transformArgs="debug=2"/>
+	</target>
+	
+	<!-- on the bin for running in the IDE. Using Eclipse IDE Enhancement another option -->
+	<target name="bin-ormEnhance">
+		<ebeanEnhance classSource="${bin.dir}" packages="**" transformArgs="debug=9"/>
+	</target>
+	
+	<!-- on the build classes -->
+	<target name="ormEnhance" depends="compile">
+		<ebeanEnhance classSource="${build.dir}" packages="app/**" transformArgs="debug=1"/>
+
+	</target>
+
+  <!-- =================================================================== -->
+  <!-- Prepares the build directory                                        -->
+  <!-- =================================================================== -->
+  <target name="prepare">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${doc.dir}"/>
+    <mkdir dir="${dist.dir}"/>        
+    <tstamp />
+
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compiles the source code                                            -->
+  <!-- =================================================================== -->
+  <!--  debug="on" -->
+
+	<path id="lib.path.ref">
+		<fileset dir="${lib.dir}" includes="*.jar" />
+	</path>
+
+		
+  <target name="compile" depends="prepare">
+  	
+  	<delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}"/>
+
+    <javac srcdir="${src.dir}"
+           destdir="${build.dir}"
+           deprecation="off"
+           optimize="on" >
+       <classpath refid="lib.path.ref" /> 
+    </javac>
+ 
+    <copy todir="${build.dir}">
+      <fileset dir="${src.dir}">
+        <include name="**/*.properties" />      
+      </fileset>
+
+    </copy>
+
+  </target>
+
+	
+ <target name="dist" depends="prepare,jar">
+  </target>
+
+	
+  <!-- =================================================================== -->
+  <!-- Creates the jar archive                                             -->
+  <!-- =================================================================== -->
+
+  <!-- remove ormEnhance to use subclassing -->
+  <target name="jar" depends="ormEnhance">
+  	
+  	<mkdir dir="${dist.dir}"/>
+  	  	
+    <jar jarfile="${dist.dir}/${name}.jar"
+         basedir="${build.dir}"
+         includes="**"
+    />
+  </target>
+
+  <target name="main" depends="dist">
+       <tstamp />
+  </target>
+
+  
+  <target name="testinsert" depends="dist">
+  	<java classname="app.data.load.TestInsert" fork="true">
+		<classpath>
+			<pathelement location="dist/example.jar"/>
+			<path refid="lib.path.ref"/>
+		</classpath>
+  	</java>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Cleans up generated stuff                                           -->
+  <!-- =================================================================== -->
+  <target name="clean">
+    <delete dir="${bin.dir}"/>
+    <delete dir="${dist.dir}"/>
+  	<delete dir="${build.dir}"/>
+  </target>
+
+</project>
+
