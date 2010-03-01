@@ -1,0 +1,20 @@
+<wicket:panel>
+	<h2>Product Catalog</h2>
+	<form wicket:id="form">
+		<p style="float:right"><input wicket:id="search"></input>
+			<button wicket:id="search_go"><wicket:message key="button.search"/></button>
+		</p>
+	</form>
+	<table wicket:id="plist" style="min-width: 500px;width:100%">
+	</table>
+	<p wicket:id="buttonbar" style="text-align:right">
+		<span wicket:id="button"/>
+	</p>
+	<div wicket:id="popup"></div>
+</wicket:panel>
+<wicket:fragment wicket:id="linkWrapper">
+	<a href="#" wicket:id="link"></a>
+</wicket:fragment>
+<wicket:fragment wicket:id="buttonWrapper">
+	<button wicket:id="button"><span wicket:id="label"/></button>
+</wicket:fragment>

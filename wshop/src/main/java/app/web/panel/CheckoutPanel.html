@@ -1,0 +1,19 @@
+<wicket:panel>
+	<h3><wicket:message key="prompt.checkout" /></h3>
+	<form wicket:id="form">Cust <select wicket:id="cust" />
+		<input type="checkbox" wicket:id="nctoggle"></input>
+		Create Customer
+		<div wicket:id="newcust2">
+			<div wicket:id="newcust">
+				<dl>
+					<dt>Name</dt>
+					<dd><input wicket:id="name"></input></dd>
+				</dl>
+				<div wicket:id="bill"></div>
+			</div>
+		</div>
+		<p>
+		<button wicket:id="submit">Ok</button>
+		</p>
+	</form>
+</wicket:panel>
