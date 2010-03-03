@@ -1,6 +1,9 @@
 package app.web;
 
 import junit.framework.TestCase;
+
+import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.util.tester.WicketTester;
 
 import app.web.page.HomePage;
@@ -26,7 +29,9 @@ public class TestHomePage extends TestCase
 		//assert rendered page class
 		tester.assertRenderedPage(HomePage.class);
 
+		tester.assertNoErrorMessage();
 		//assert rendered label component
-		tester.assertLabel("message", "If you see this message wicket is properly configured and running");
+		tester.assertComponent("catalog:form:search",TextField.class);
+		tester.assertComponent("catalog:plist",DataTable.class);
 	}
 }
