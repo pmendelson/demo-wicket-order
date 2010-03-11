@@ -28,12 +28,6 @@
 			<type>jar</type>
 		</dependency>
 		<dependency>
-			<groupId>org.avaje</groupId>
-			<artifactId>ebean-enhancer</artifactId>
-			<version>${ebean.version}</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>persistence-api</artifactId>
 			<version>1.0</version>
