@@ -4,7 +4,7 @@
 	<groupId>org.ebean.demo</groupId>
 	<artifactId>web</artifactId>
 	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>2.5</version>
 	<!-- TODO project name  -->
 	<name>quickstart</name>
 	<description></description>
@@ -29,7 +29,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.avaje</groupId>
-			<artifactId>ebean-agent</artifactId>
+			<artifactId>ebean-enhancer</artifactId>
 			<version>${ebean.version}</version>
 			<type>jar</type>
 		</dependency>
@@ -54,11 +54,6 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<!--
-			OPTIONAL <dependency> <groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-extensions</artifactId>
-			<version>${wicket.version}</version> </dependency>
-		-->
 
 		<!-- LOGGING DEPENDENCIES - LOG4J -->
 		<dependency>
@@ -82,7 +77,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -170,31 +165,6 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>compile</id>
-						<phase>compile</phase>
-						<configuration>
-							<tasks>
-								<property name="runtime_classpath" refid="maven.runtime.classpath" />
-								<property name="test_classpath" refid="maven.test.classpath" />
-								<taskdef name="ebeanEnhance"
-									classname="com.avaje.ebean.enhance.ant.AntEnhanceTask"
-									classpath="${runtime_classpath}" />
-								<ebeanEnhance classSource="${project.build.directory}/classes"
-									packages="app/**" transformArgs="debug=1" />
-								<echo>Test: ${test_classpath}</echo>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<useSystemClassLoader>false</useSystemClassLoader>
@@ -219,11 +189,29 @@
 					<downloadJavadoc>true</downloadJavadoc>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.avaje</groupId>
+				<artifactId>ebean-enhancer</artifactId>
+				<version>${ebean.version}</version>
+				<executions>
+					<execution>
+						<id>main</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+						<configuration>
+							<packages>app.data</packages>
+							<transformArgs>debug=1</transformArgs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<properties>
-		<ebean.version>2.3.0</ebean.version>
-		<wicket.version>1.4.5</wicket.version>
+		<ebean.version>2.5.0-BETA2</ebean.version>
+		<wicket.version>1.4.6</wicket.version>
 		<jetty.version>6.1.4</jetty.version>
 		<file.encoding>UTF-8</file.encoding>
 		<slf4j.version>1.5.10</slf4j.version>
