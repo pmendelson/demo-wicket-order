@@ -185,7 +185,7 @@
 			</plugin>
 			<plugin>
 				<groupId>org.avaje</groupId>
-				<artifactId>ebean-enhancer</artifactId>
+				<artifactId>ebean-enhancer-plugin</artifactId>
 				<version>${ebean.version}</version>
 				<executions>
 					<execution>
