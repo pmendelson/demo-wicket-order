@@ -185,7 +185,7 @@
 			</plugin>
 			<plugin>
 				<groupId>org.avaje</groupId>
-				<artifactId>ebean-enhancer-plugin</artifactId>
+				<artifactId>ebean-maven-enhancement-plugin</artifactId>
 				<version>${ebean.version}</version>
 				<executions>
 					<execution>
@@ -204,10 +204,11 @@
 		</plugins>
 	</build>
 	<properties>
-		<ebean.version>2.5.0-BETA2</ebean.version>
+		<ebean.version>2.5.0-SNAPSHOT</ebean.version>
 		<wicket.version>1.4.6</wicket.version>
-		<jetty.version>6.1.4</jetty.version>
+		<jetty.version>6.1.22</jetty.version>
 		<file.encoding>UTF-8</file.encoding>
 		<slf4j.version>1.5.10</slf4j.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 </project>
