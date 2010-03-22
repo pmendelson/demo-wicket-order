@@ -204,7 +204,7 @@
 		</plugins>
 	</build>
 	<properties>
-		<ebean.version>2.5.0-SNAPSHOT</ebean.version>
+		<ebean.version>2.5.0</ebean.version>
 		<wicket.version>1.4.6</wicket.version>
 		<jetty.version>6.1.22</jetty.version>
 		<file.encoding>UTF-8</file.encoding>
