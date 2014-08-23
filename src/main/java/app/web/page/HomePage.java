@@ -30,7 +30,7 @@ public class HomePage extends EBeanStorePage {
 
 	/**
 	 * Constructor that is invoked when page is invoked without a session.
-	 * 
+	 *
 	 * @param parameters
 	 *            Page parameters
 	 */
@@ -41,7 +41,7 @@ public class HomePage extends EBeanStorePage {
 			session.setCurrentCart(null);
 		}
 		// TODO Add your page's components here
-		Ebean.find(Order.class).join("customer").where().gt("id", 0).eq(
+		Ebean.find(Order.class).fetch("customer").where().gt("id", 0).eq(
 				"status", Order.Status.NEW).ilike("customer.name", "Ro%")
 				.query();
 
@@ -51,7 +51,7 @@ public class HomePage extends EBeanStorePage {
 			public Integer getObject() {
 				return Ebean.find(Order.class).findRowCount();
 			}
-			
+
 		}).setOutputMarkupId(true));
 		add(new ViewCatalogPanel("catalog"));
 	}
