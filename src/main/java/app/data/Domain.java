@@ -1,48 +1,42 @@
 package app.data;
 
+import io.ebean.annotation.WhenCreated;
 import java.io.Serializable;
 import java.sql.Timestamp;
-
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import com.avaje.ebean.annotation.CreatedTimestamp;
-
 @MappedSuperclass
-public class Domain implements Serializable{
+public class Domain implements Serializable {
 
-    @Id
-    private Integer id;
+  @Id private Integer id;
 
-    @CreatedTimestamp
-    private Timestamp cretime;
+  @WhenCreated private Timestamp cretime;
 
-    @Version
-    private Timestamp updtime;
-    
-	public Integer getId() {
-		return id;
-	}
+  @Version private Timestamp updtime;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public Timestamp getCretime() {
-		return cretime;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setCretime(Timestamp cretime) {
-		this.cretime = cretime;
-	}
+  public Timestamp getCretime() {
+    return cretime;
+  }
 
-	public Timestamp getUpdtime() {
-		return updtime;
-	}
+  public void setCretime(Timestamp cretime) {
+    this.cretime = cretime;
+  }
 
-	public void setUpdtime(Timestamp updtime) {
-		this.updtime = updtime;
-	}
-    
+  public Timestamp getUpdtime() {
+    return updtime;
+  }
+
+  public void setUpdtime(Timestamp updtime) {
+    this.updtime = updtime;
+  }
 }
